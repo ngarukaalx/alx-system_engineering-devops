@@ -4,5 +4,6 @@
 infinit=1
 while [ $infinit ]; do
 echo "To infinity and beyond"
+sleep 2
 ((infinit++))
 done
