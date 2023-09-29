@@ -3,6 +3,8 @@
 
 pid=$(pgrep -f "4-to_infinity_and_beyond")
 
-if [ -n $pid ]; then
-	kill -9 "$pid"
+if [ -n "$pid" ]; then
+	for pid in $pid; do
+		kill -TERM "$pid"
+	done
 fi
