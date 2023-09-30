@@ -1,0 +1,9 @@
+#!/usr/bin/env bash
+# Bash script that displays the content of the
+#+ file /etc/passwd, using the while loop + IFS.
+
+file="/etc/passwd"
+
+while IFS=: read -r username group_id home_dr commandshell user_id password useridinfo; do
+	echo "The user $username is part of the $home_dr gang, lives in $password  and rides $useridinfo. $commandshell's place is protected by the passcode $group_id, more info about the user here: $user_id"
+done < "$file"
