@@ -1,12 +1,5 @@
 #  using Puppet to make changes to our configuration file
-file_line {'default':
-ensure => present,
-path   => '/ssh/config',
-line   => ' IdentityFile ~/.ssh/school',
-}
-
-file_line {'pass iden':
-ensure => present,
-path   =>'/ssh/config',
-line   => ' PasswordAuthentication no',
+file {'/etc/ssh/ssh_config':
+ensure  => present,
+content => template('/home/vagrant/alx-system_engineering-devops/0x0B-ssh/ssh_config.erb'),
 }
