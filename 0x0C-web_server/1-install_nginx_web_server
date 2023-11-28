@@ -3,5 +3,6 @@
 
 apt update
 apt install -y nginx
+echo "Hello World!" | tee /var/www/html/index.nginx-debian.html > /dev/null
 sed -i 's/.*listen 80;/listen 80;/' /etc/nginx/sites-available/default
 kill -s HUP "$(pgrep -f nginx)"
