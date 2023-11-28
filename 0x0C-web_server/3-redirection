@@ -1,0 +1,13 @@
+#!/usr/bin/env bash
+# configures ubuntu machine with requirements
+
+apt update
+apt install -y nginx
+echo "Hello World!" | tee /var/www/html/index.html
+ufw allow 'Nginx HTTP'
+
+# 301 Redirection
+replace_string="server_name _;\n\trewrite ^\/redirect_me https:\/\/madukaonline.co.ke\/ permanent;"
+sed -i "s/server_name _;/$replace_string/" /etc/nginx/sites-enabled/default
+nginx -t
+service nginx restart
