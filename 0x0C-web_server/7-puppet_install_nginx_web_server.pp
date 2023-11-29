@@ -1,4 +1,4 @@
-# Installs nginx and configures
+# Installs nginx and configures with requirements
 
 package {'nginx':
   ensure => installed,
