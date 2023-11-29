@@ -1,7 +1,7 @@
 # Installs nginx and configures
 
 package {'nginx':
-  ensure => 'installed',
+  ensure => installed,
 }
 
 # Helllo world index.html
@@ -19,6 +19,6 @@ file_line {'nginx_redirect':
 }
 
 service { 'nginx':
-  ensure  => 'running',
+  ensure  => running,
   require => package['nginx']
 }
