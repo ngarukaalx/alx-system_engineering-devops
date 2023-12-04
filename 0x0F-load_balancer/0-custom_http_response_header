@@ -1,0 +1,24 @@
+#!/usr/bin/env bash
+# Configure Nginx so that its HTTP response contains a custom header 
+
+apt update
+apt install -y nginx
+echo "Hello World!" | tee /var/www/html/index.html
+ufw allow 'Nginx HTTP'
+
+# 301 Redirection
+replace_string="server_name _;\n\trewrite ^\/redirect_me https:\/\/madukaonline.co.ke\/ permanent;"
+sed -i "s/server_name _;/$replace_string/" /etc/nginx/sites-enabled/default
+
+# 404 error custom page
+echo "Ceci n'est pas une page" | tee /var/www/html/error.html
+content="listen 80 default_server;\n\terror_page 404 \/error.html;\n\tlocation = \/error.html {\n\t\troot \/var\/www\/html;\n\t\tinternal;\n\t}"
+sudo sed -i "s/listen 80 default_server;/$content/" /etc/nginx/sites-enabled/default
+
+# name of the custom HTTP header must be X-Served-By value of the custom HTTP header must be the hostname of the server Nginx is running on
+
+custom_header="add_header X-Served-By \$hostname;"
+sed -i "/^server {/a \\\t$custom_header" /etc/nginx/sites-enabled/default
+
+nginx -t
+service nginx restart
