@@ -17,8 +17,7 @@ sudo sed -i "s/listen 80 default_server;/$content/" /etc/nginx/sites-enabled/def
 
 # name of the custom HTTP header must be X-Served-By value of the custom HTTP header must be the hostname of the server Nginx is running on
 
-custom_header="add_header X-Served-By \$HOSTNAME;"
-sed -i "/^server {/a \\\t$custom_header" /etc/nginx/sites-enabled/default
+sed -i "/server_name _/a add_header X-Served-By $HOSTNAME;" /etc/nginx/sites-enabled/default
 
 nginx -t
 service nginx restart
