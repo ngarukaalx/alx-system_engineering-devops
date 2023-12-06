@@ -3,6 +3,6 @@
 
 apt update
 apt install -y nginx
-ufw allow 'Nginx HTTP'
+sudo ln -sf /etc/nginx/sites-available/default /etc/nginx/sites-enabled/default
 nginx -t
 service nginx start
