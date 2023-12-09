@@ -14,7 +14,7 @@ frontend http
 backend Web_backend
     balance roundrobin
     server 307762-web-01 3.80.19.164:80 check
-    server 307762-web-02 100.26.222.189:80 check
+    server 307762-web-02 107.23.64.175:80 check
 "
 # configure haproxy.cfg with two servers and to use roundrobin
 echo "$haproxy_config" | tee -a /etc/haproxy/haproxy.cfg
