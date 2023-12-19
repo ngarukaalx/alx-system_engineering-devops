@@ -1,0 +1,17 @@
+#!/usr/bin/env bash
+# listening on all active IPs on port 8080,nginx must be running as nginx user
+
+if ! getent passwd nginx >/dev/null 2>&1; then
+	sudo adduser --system --no-create-home --disabled-login --disabled-password --group nginx
+fi
+
+content="user nginx;"
+sudo sed -i "s/user www-data;/$content/" /etc/nginx/nginx.conf
+
+conf=$(printf "\tserver {
+\t\tlisten 8080;
+\t\tserver_name _;  # Listen on all active IPs
+}\n")
+sudo sed -i '/http {/ r /dev/stdin' /etc/nginx/nginx.conf <<< "$conf"
+sudo nginx -t
+sudo service nginx restart
