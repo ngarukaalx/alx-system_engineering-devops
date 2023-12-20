@@ -1,0 +1,18 @@
+#!/usr/bin/env bash
+# generates a MySQL dump and creates a compressed archive out of it
+
+DB_USER="root"
+DB_PASSWD=$1
+DUMP_FILE="backup.sql"
+
+# dump all databases
+mysqldump -u "$DB_USER" -p "$DB_PASSWD" --all-databases > "$DUMP_FILE"
+
+# get current date
+CURRENT_DATE=$(date '+%d-%m-%Y')
+
+# CREATE RECOMMENDEED ARCHIVE FILE
+TAR_FILE="$CURRENT_DATE.tar.gz"
+
+#compress dump file to archive
+tar -czvf "$TAR_FILE" "$DUMP_FILE"
