@@ -35,5 +35,5 @@ if __name__ == "__main__":
             writer = csv.writer(file, quoting=csv.QUOTE_ALL)
             for todo in todos_data:
                 writer.writerow(
-                        [employee_id, user_data['name'],
+                        [employee_id, user_data['username'],
                             todo['completed'], todo['title']])
