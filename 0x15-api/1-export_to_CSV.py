@@ -8,7 +8,7 @@ import sys
 if __name__ == "__main__":
     """Only execute when run directly"""
     employee_id = sys.argv[1]
-    csv_file = "USER_ID.csv"
+    csv_file = f"{employee_id}.csv"
 
     if employee_id.isdigit():
         base_url = "https://jsonplaceholder.typicode.com"
