@@ -25,7 +25,7 @@ if __name__ == "__main__":
 
         # create CSV file
         with open(csv_file, 'w', newline='') as file:
-            writer = csv.writer(file)
+            writer = csv.writer(file, quoting=csv.QUOTE_ALL)
             for todo in todos_data:
                 writer.writerow(
                         [employee_id, user_data['name'],
