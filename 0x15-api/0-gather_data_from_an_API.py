@@ -24,6 +24,6 @@ if __name__ == "__main__":
         complete_tasks = [todo for todo in todos_data if todo["completed"]]
         total_tasks = len(todos_data)
         print(f"Employee {user_data['name']} is done with tasks"
-              f"({len(complete_tasks)}/{total_tasks})")
+                f"({len(complete_tasks)}/{total_tasks}):")
         for task in complete_tasks:
             print(f"\t {task['title']}")
