@@ -1,0 +1,49 @@
+server {
+        add_header X-Served-By $hostname;
+        listen [::]:80 default_server;
+        listen 80 default_server;
+        error_page 404 /error.html;
+        location = /error.html {
+                root /var/www/html;
+                internal;
+        }
+        server_name localhost 3.80.19.164;
+
+        rewrite ^/redirect_me https://madukaonline.co.ke/ permanent;
+
+	location /api/ {
+                include proxy_params;
+                proxy_pass http://0.0.0.0:5002/api/;
+        }
+
+        location /hbnb_static/ {
+		alias /data/web_static/current/;
+	}
+
+	location /2-hbnb/ {
+                include proxy_params;
+                proxy_pass http://0.0.0.0:5003/2-hbnb/;
+        }
+
+        location /static/styles/ {
+                alias /home/ubuntu/AirBnB_clone_v4/web_dynamic/static/styles/;
+        }
+
+        location /static/scripts/ {
+                alias /home/ubuntu/AirBnB_clone_v4/web_dynamic/static/scripts/;
+        }
+
+        location /static/images/ {
+                alias /home/ubuntu/AirBnB_clone_v4/web_dynamic/static/images/;
+        }
+
+        root /var/www/html;
+
+        index index.html index.htm index.nginx-debian.html;
+
+        location / {
+                # First attempt to serve request as file, then
+                # as directory, then fall back to displaying a 404.
+                try_files $uri $uri/ =404;
+        }
+}

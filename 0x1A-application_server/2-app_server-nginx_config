@@ -1,0 +1,30 @@
+server {
+        add_header X-Served-By $hostname;
+        listen [::]:80 default_server;
+        listen 80 default_server;
+        error_page 404 /error.html;
+        location = /error.html {
+                root /var/www/html;
+                internal;
+        }
+        server_name localhost 3.80.19.164;
+
+        rewrite ^/redirect_me https://madukaonline.co.ke/ permanent;
+
+        location /airbnb-onepage/ {
+                include proxy_params;
+                proxy_pass http://0.0.0.0:5000/airbnb-onepage/;
+        }
+        location /hbnb_static/ {
+                alias /data/web_static/current/;
+        }
+        root /var/www/html;
+
+        index index.html index.htm index.nginx-debian.html;
+
+        location / {
+                # First attempt to serve request as file, then
+                # as directory, then fall back to displaying a 404.
+                try_files $uri $uri/ =404;
+        }
+}
