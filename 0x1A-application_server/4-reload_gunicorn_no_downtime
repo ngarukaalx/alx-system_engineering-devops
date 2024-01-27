@@ -1,0 +1,7 @@
+#!/usr/bin/env bash
+# reload Gunicorn in a graceful way.
+
+# get the pid of gunicorn master process
+master_pid=$(sudo systemctl show -p MainPID --value gunicorn)
+# send HUP signal to reload gracefully
+sudo kill -HUP "$master_pid"
